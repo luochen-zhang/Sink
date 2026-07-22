@@ -33,16 +33,12 @@ jobs:
       - name: Build Sink
         run: pnpm run build
 
-      - name: Apply D1 Migrations
+      # 【重点】同一个wrangler-action连续执行两条命令
+      - name: Migrate & Deploy
         uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: d1 migrations apply DB
-
-      - name: Deploy Worker
-        uses: cloudflare/wrangler-action@v4
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy --verbose
+          command: |
+            d1 migrations apply DB
+            deploy --verbose
