@@ -1,7 +1,7 @@
 name: Deploy Sink to Cloudflare Workers
 on:
   push:
-    branches: [main]
+    branches: [master]
   workflow_dispatch: # 支持网页手动一键部署
 
 jobs:
