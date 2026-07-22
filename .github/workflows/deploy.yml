@@ -13,8 +13,6 @@ jobs:
       DEPLOY_KV_PREVIEW_NAMESPACE_ID: ${{ secrets.DEPLOY_KV_PREVIEW_NAMESPACE_ID }}
       DEPLOY_D1_DATABASE_NAME: ${{ secrets.DEPLOY_D1_DATABASE_NAME }}
       DEPLOY_D1_DATABASE_ID: ${{ secrets.DEPLOY_D1_DATABASE_ID }}
-      DEPLOY_R2_PREVIEW_BUCKET_NAME: ${{ secrets.DEPLOY_R2_PREVIEW_BUCKET_NAME }}
-      DEPLOY_R2_BUCKET_NAME: ${{ secrets.DEPLOY_R2_BUCKET_NAME }}
     steps:
       - uses: actions/checkout@v4
 
