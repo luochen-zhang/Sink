@@ -20,7 +20,6 @@ jobs:
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
-        # 移除 version:10，自动读取package.json要求的pnpm@11.11.0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -34,8 +33,16 @@ jobs:
       - name: Build Sink
         run: pnpm run build
 
+      - name: Apply D1 Migrations
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: d1 migrations apply DB
+
       - name: Deploy Worker
         uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy --verbose
